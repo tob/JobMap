@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import Title from './components/Title'
 import Map from './components/Map'
+import MainMapBlock from './components/complexMap'
 import AllItems from './contents/AllItems'
-import logo from './logo.svg';
+import {Flex, Box } from 'reflexbox'
 import './App.css';
 
-const items = [
-  {
-    company: 'Technogym',
-    startDate:'july 2011',
-    endDate:'july 2012',
-    role:'Project Manager',
-    summary: 'working out a lot',
-    active: false,
-    open: true,
-    current: true,
-  },]
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Title content="Tobia Donati" />
-        <AllItems items={items} />
-        <Map />
+        <Flex
+        wrap
+        w={1}
+        style={{ height: '100%' }}
+        justify='left' >
+        <Box w={1/2} >
+                     <AllItems items={items} />
+        </Box>
+        <Box w={1/2} >
+          <MainMapBlock />
+        </Box>
+        <Box w={1} >
+          <Map />
+        </Box>
+      </Flex>
+
+
       </div>
     );
   }

@@ -1,5 +1,6 @@
 // src/contents/AllItems.js
-import React, { PureComponent } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import Title from '../components/Title'
 import Item from './Item.js'
 
@@ -23,4 +24,8 @@ class AllItems extends PureComponent {
   }
 }
 
-export default AllItems
+const mapStateToProps = ({ items }) => ({
+  items
+})
+
+export default connect(mapStateToProps)(AllItems)

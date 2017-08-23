@@ -1,42 +1,37 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
+const image = 'https://d30y9cdsu7xlg0.cloudfront.net/png/7776-200.png'
 
 const AnyReactComponent = ({ text }) => (
-  <div style={{
-    position: 'relative', color: 'white', background: 'red',
-    height: 40, width: 60, top: -20, left: -30,
-  }}>
-    {text}
-  </div>
+   <img src={image} style={{
+      position: 'relative', color: 'white', width: 50,
+      height: 40, width: 60, top: -20, left: -30}}/>
+
 );
 
 
 
 class Map extends Component {
   static defaultProps = {
-    center: {lat: 59.95, lng: 30.33},
+    center: {lat: 53.35, lng: -6.260310},
     zoom: 11
   };
 
   render() {
     return (
 
-      <div className="box box-default" >
-        <div className="box-body">
-          <div className="row">
+
             <GoogleMapReact
               defaultCenter={this.props.center}
               defaultZoom={this.props.zoom}
             >
               <AnyReactComponent
-                lat={59.955413}
-                lng={30.337844}
-                text={'Kreyser Avrora'}/>
+                lat={53.349805}
+                lng={-6.260310}
+                text={'Dublino INOINOINO !!!!!!'}/>
             </GoogleMapReact>
-          </div>
-        </div>
-      </div>
+
     );
   }
 }
