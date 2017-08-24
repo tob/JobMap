@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
 
-const image = 'https://d30y9cdsu7xlg0.cloudfront.net/png/7776-200.png'
+const styles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+};
 
-const AnyReactComponent = ({ text }) => (
-   <img src={image} style={{
-      position: 'relative', color: 'white', width: 50,
-      height: 40, width: 60, top: -20, left: -30}}/>
+function handleTouchTap() {
+  alert('You clicked the Chip.');
+}
+
+
+const Pin = ({ text, image }) => (
+
+    <Chip
+      onClick={handleTouchTap}
+      style={styles.chip}
+    >
+      <Avatar src={image} />
+      {text}
+    </Chip>
 
 );
 
@@ -14,24 +34,30 @@ const AnyReactComponent = ({ text }) => (
 
 class Map extends Component {
   static defaultProps = {
-    center: {lat: 53.35, lng: -6.260310},
-    zoom: 11
+    center: {lat: 52.35, lng: 4.897070},
+    zoom: 6
   };
+
+
 
   render() {
     return (
-
 
             <GoogleMapReact
               defaultCenter={this.props.center}
               defaultZoom={this.props.zoom}
             >
-              <AnyReactComponent
-                lat={53.349805}
-                lng={-6.260310}
-                text={'Dublino INOINOINO !!!!!!'}/>
-            </GoogleMapReact>
 
+            {this.props.locations.map((work) => (
+              <Pin
+                lat={work.lat}
+                lng={work.lng}
+                text={work.company}
+                image={work.logo}/>
+              )
+            )
+          }
+            </GoogleMapReact>
     );
   }
 }

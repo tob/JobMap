@@ -1,5 +1,8 @@
 // src/contents/Item.js
 import React, { PureComponent } from 'react'
+import Avatar from 'material-ui/Avatar';
+import {List, ListItem} from 'material-ui/List';
+import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
 class Item extends PureComponent {
   render() {
@@ -12,23 +15,18 @@ class Item extends PureComponent {
       active,
       open,
       current,
+      logo,
      } = this.props
 
     return(
-      <article className="item">
-        <h2>{ company }</h2>
-        <div>
-          <p>{ summary }</p>
-          <p>{ startDate }</p>
-          <p>{ endDate }</p>
-          <p>{ role }</p>
-          <ul>
-            { active && <li><span role="img" aria-label="Active">🌾</span></li> }
-            { !open && active && <li><span role="img" aria-label="closed">🥕</span></li> }
-            { current && <li><span role="img" aria-label="current">🐟</span></li> }
-          </ul>
-        </div>
-      </article>
+
+      <ListItem
+        primaryText={company}
+        secondaryText={role}
+        leftAvatar={<Avatar src={logo} />}
+        rightIcon={<CommunicationChatBubble />}
+      />
+
     )
   }
 }

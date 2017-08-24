@@ -3,6 +3,7 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Title from '../components/Title'
 import Item from './Item.js'
+import {List, ListItem} from 'material-ui/List';
 
 class AllItems extends PureComponent {
   renderItem(item, index) {
@@ -12,12 +13,15 @@ class AllItems extends PureComponent {
   render() {
     return(
       <div className="items wrapper">
+        <main>
         <header>
           <Title content="Professional experiences" />
         </header>
 
-        <main>
-          { this.props.items.map(this.renderItem) }
+
+          <List>
+            { this.props.items.map(this.renderItem) }
+          </List>
         </main>
       </div>
     )

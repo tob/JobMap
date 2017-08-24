@@ -4,9 +4,14 @@
   "private": true,
   "dependencies": {
     "google-map-react": "^0.24.0",
+    "material-ui": "^0.17.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.0.11",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "reflexbox": "^3.0.0-0"
   },
   "scripts": {
