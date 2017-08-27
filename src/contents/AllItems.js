@@ -1,9 +1,9 @@
 // src/contents/AllItems.js
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PureComponent} from 'react'
 import { connect } from 'react-redux'
 import Title from '../components/Title'
 import Item from './Item.js'
-import {List, ListItem} from 'material-ui/List';
+import {List} from 'material-ui/List';
 
 class AllItems extends PureComponent {
   renderItem(item, index) {

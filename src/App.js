@@ -15,10 +15,13 @@ import './App.css'
 
 
 class App extends Component {
+
   static propTypes = {
     items: PropTypes.array.isRequired,
     fetchItems: PropTypes.func.isRequired,
   }
+
+
 
   static childContextTypes = {
    muiTheme: PropTypes.object.isRequired,
@@ -38,10 +41,7 @@ class App extends Component {
     return (
             <MuiThemeProvider muiTheme={muiTheme}>
               <div className="App">
-                <AppBar
-    title="Title"
-    iconClassNameRight="muidocs-icon-navigation-expand-more"
-  />
+                
                 <Title content="Tobia Donati" />
                 <Flex
                   wrap
@@ -57,9 +57,10 @@ class App extends Component {
                     <AllItems items={items} />
                   </Box>
                   <Box w={1/2} >
-                    <Map locations={items}/>
+                    <Map items={items}/>
                   </Box>
                   <Box w={1} >
+
 
                   </Box>
                 </Flex>
