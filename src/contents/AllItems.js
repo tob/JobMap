@@ -18,10 +18,9 @@ class AllItems extends PureComponent {
           <Title content="Professional experiences" />
         </header>
 
-
-          <List>
+          <div>
             { this.props.items.map(this.renderItem) }
-          </List>
+          </div>
         </main>
       </div>
     )
