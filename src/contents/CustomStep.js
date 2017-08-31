@@ -106,7 +106,7 @@ changeIndex(stepIndex){
 
     return(
 
-    <Step active={stepIndex === 0}>
+    <Step active={stepIndex === this.props.index}>
 
         <StepButton onClick={this.handleStepClick.bind(this)}>
           {startDate} - {endDate}
