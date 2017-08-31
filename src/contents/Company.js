@@ -41,7 +41,7 @@ setCenter() {
     const {
       index,
       company,
-      startDate,
+      // startDate,
       // endDate,
       role,
       summary,
@@ -54,7 +54,8 @@ setCenter() {
       <Chip
         onTouchTap={this.handleToggle.bind(this)}>
 
-        {startDate}
+        <Avatar src={logo} />
+        {company}
         <Drawer openSecondary={true} open={this.state.open}>
           <h1>{company}</h1>
           <h2>{role}</h2>

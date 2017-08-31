@@ -1,8 +1,6 @@
 import React, { PureComponent} from 'react'
 import {
   Step,
-
-  StepLabel,
   StepButton,
   StepContent,
 } from 'material-ui/Stepper';
@@ -10,15 +8,17 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 import Item from './Item.js'
+import setCenter from '../actions/map/setCenter'
+import setStep from '../actions/items/setStep'
+import { connect } from 'react-redux'
 
 
 
 class CustomStep extends PureComponent {
 
 componentWillMount(){
-  // const { items } = this.props;
-  const { stepIndex } = this.props.stepIndex;
-  console.log(stepIndex)
+  const { items } = this.props;
+  const { stepIndex } = this.props.index;
 }
 
 handleNext = () => {
@@ -38,9 +38,14 @@ handlePrev = () => {
 };
 
 handleStepClick(e){
-  const stepIndex = e.target.index;
-  this.props.changeIndex(stepIndex);
+  const stepIndex = this.props.index;
+  // this.changeIndex(stepIndex);
+  this.setCenter();
 };
+
+changeIndex(stepIndex){
+  this.setState({stepIndex});
+}
 
 
   renderStepActions(step) {
@@ -66,6 +71,15 @@ handleStepClick(e){
     );
   }
 
+  setCenter() {
+      const mapSettings = this.props.center;
+      const stepIndex = this.props.index;
+      console.log({mapSettings, stepIndex});
+      this.props.setStep(
+        Object.assign({}, stepIndex));
+      this.props.setCenter(
+        Object.assign({}, mapSettings));
+    }
 
 
   render() {
@@ -74,27 +88,23 @@ handleStepClick(e){
       index,
       company,
       startDate,
-      // endDate,
+      endDate,
       // role,
       summary,
       // active,
       // open,
       // current,
+      mapSettings,
       logo,
       // changeIndex,
      } = this.props
 
     return(
-      this.props.changeIndex(),
 
     <Step>
       <div>
-        <StepLabel
-          icon={<Avatar src={logo} />} >
-          {startDate}
-        </StepLabel>
         <StepButton index={index} onClick={this.handleStepClick.bind(this)}>
-          {company}
+          {startDate} - {endDate}
         </StepButton>
         <StepContent>
           <p>
@@ -107,8 +117,11 @@ handleStepClick(e){
     </Step>
     )
   }
-
 }
 
+const mapStateToProps = ({ stepIndex, mapSettings }) => ({
+  stepIndex,
+  mapSettings
+})
 
-export default CustomStep
+export default connect(mapStateToProps, { setCenter, setStep })(CustomStep)

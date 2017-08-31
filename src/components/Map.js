@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import GoogleMap from 'google-map-react';
 import { connect } from 'react-redux'
-import Item from '../contents/Item.js'
+import Item from '../contents/Company.js'
 
 
 
@@ -32,7 +32,7 @@ class Map extends PureComponent {
      } = this.props
 
      console.log(this.props.center);
-     
+
     return (
 
             <GoogleMap

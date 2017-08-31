@@ -14,7 +14,7 @@ class AllItems extends PureComponent {
 
   constructor(props) {
     super(props);
-      this.state = {open: false, active:false, stepIndex:this.props.index, center:{lat:this.props.lat,lng:this.props.lng,}};
+      this.state = {open: false, active:false, stepIndex:this.props.stepIndex, center:{lat:this.props.lat,lng:this.props.lng,}};
   }
 
   renderItem(item, index) {
@@ -26,46 +26,35 @@ class AllItems extends PureComponent {
   }
 
   renderStep(item, index) {
-    if (!this) return null
-    return <CustomStep key={index} changeIndex={this.changeIndex.bind(this)} { ...item } />
+    return <CustomStep key={index} { ...item } />
   }
 
 
 
 
   render() {
-    const {stepIndex} = this.state;
+    if (!this.props) return null
+    const {
+      stepIndex = this.props.stepIndex
+     } = this.props
 
     return(
       <div className="items wrapper">
-        <main>
-        <header>
-          <Title content="experiences" />
-        </header>
-
-          <div>
-            { this.props.items.map(this.renderItem) }
-          </div>
-          <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
-            <Stepper
-
-            linear={false}
-            orientation="vertical"
-            >
-
-
-
-            </Stepper>
-        </div>
-
-        </main>
+        <Stepper
+        activeStep={stepIndex}
+        linear={false}
+        orientation="vertical"
+        >
+        { this.props.items.map(this.renderStep) }
+        </Stepper>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ items }) => ({
-  items
+const mapStateToProps = ({ items, stepIndex }) => ({
+  items,
+  stepIndex
 })
 
 export default connect(mapStateToProps)(AllItems)

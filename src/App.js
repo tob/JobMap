@@ -61,8 +61,7 @@ class App extends Component {
                   <AllItems items={items}/>
                   </Box>
                   <Box w={3/4} >
-                    <Map items={items}
-                    zoom={items[0].zoom}/>
+                    <Map items={items} zoom={4}/>
                   </Box>
                   <Box w={1} >
                   </Box>
