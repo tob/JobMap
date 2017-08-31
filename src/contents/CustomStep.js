@@ -102,9 +102,11 @@ changeIndex(stepIndex){
       // changeIndex,
      } = this.props
 
+     const stepIndex = this.props.mapSettings.stepIndex
+
     return(
 
-    <Step>
+    <Step active={stepIndex === 0}>
 
         <StepButton onClick={this.handleStepClick.bind(this)}>
           {startDate} - {endDate}
