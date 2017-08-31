@@ -1,56 +1,72 @@
 // src/contents/Item.js
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import setCenter from '../actions/map/setCenter'
 import Avatar from 'material-ui/Avatar';
-import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 import Drawer from 'material-ui/Drawer';
 import Chip from 'material-ui/Chip';
 
 class Item extends PureComponent {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    open: PropTypes.bool.isRequired,
-    active: PropTypes.bool.isRequired,
-  }
-
 
   constructor(props) {
   super(props);
-  this.state = {open: false, active:false};
+  this.state = {open: false, active:false, stepIndex:this.props.index, center:this.props.center};
 }
 
-handleToggle = () => this.setState({open: !this.state.open, active:!this.state.active});
+handleToggle(e){
+
+  this.setState(
+    {
+      
+      stepIndex:this.props.index,
+      center:this.props.center,
+    }
+  );
+  console.log(this.state);
+  console.log(this.props);
+  this.setCenter()
+}
+
+setCenter() {
+    const mapSettings = this.props.center
+    console.log({mapSettings});
+    this.props.setCenter(
+      Object.assign({}, mapSettings));
+  }
 
   render() {
+    setCenter()
 
     const {
+      index,
       company,
       // startDate,
       // endDate,
       role,
       summary,
-      active,
-      open,
-      // current,
+      mapSettings,
       logo,
      } = this.props
 
     return(
 
       <Chip
-        onClick={this.handleToggle}
-        rightIcon={<CommunicationChatBubble />}
-      >
-      <Avatar src={logo} />
-      {company}
-      <Drawer open={this.state.open}>
-      <h1>{company}</h1>
-      <h2>{role}</h2>
-      <p>{summary}</p>
-      <Avatar src={logo} />
-      </Drawer>
+        onTouchTap={this.handleToggle.bind(this)}>
+
+        <Avatar src={logo} />
+        {company}
+        <Drawer openSecondary={true} open={this.state.open}>
+          <h1>{company}</h1>
+          <h2>{role}</h2>
+          <p>{summary}</p>
+          <Avatar src={logo} />
+        </Drawer>
       </Chip>
     )
   }
 }
+const mapStateToProps = ({ mapSettings }) => ({
+  mapSettings
+})
 
-export default Item
+export default connect(mapStateToProps, { setCenter })(Item)

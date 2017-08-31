@@ -1,50 +1,53 @@
-import React, { PureComponent, PropTypes } from 'react'
-import GoogleMapReact from 'google-map-react';
+import React, { PureComponent } from 'react'
+import GoogleMap from 'google-map-react';
 import { connect } from 'react-redux'
-import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
 import Item from '../contents/Item.js'
 
-const styles = {
-  chip: {
-    margin: 4,
-  },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-};
 
 
 class Map extends PureComponent {
-  static defaultProps = {
-    center: {lat: 52.35, lng: 4.897070},
-    zoom: 6
-  };
 
   renderItem(item, index) {
     return <Item key={index} { ...item } />
-    
   }
 
-
-
   render() {
-    const center = {lat: 52.35, lng: 4.897070}
+    if (!this.props) return null
+    const {
+      index,
+      company,
+      // startDate,
+      // endDate,
+      role,
+      summary,
+      center = this.props.mapSettings,
+      // active,
+      // open,
+      // current,
+      logo,
+      zoom = 5,
+      GoogleMapConfig = {
+        key:'AIzaSyCdPX0f-j9GMIC4N-0SnnOLT48_3ltY1_g',
+      },
+     } = this.props
 
+     console.log(this.props.center);
+     
     return (
 
-            <GoogleMapReact
-              defaultCenter={center}
-              defaultZoom={this.props.zoom}
+            <GoogleMap
+              bootstrapURLKeys={GoogleMapConfig}
+              center={center}
+              zoom={zoom}
             >
             {this.props.items.map(this.renderItem)}
-            </GoogleMapReact>
+            </GoogleMap>
     )
   }
 }
-const mapStateToProps = ({ items }) => ({
-  items
+const mapStateToProps = ({ items, mapSettings }) => ({
+  items,
+  mapSettings
 })
 
 export default connect(mapStateToProps)(Map)

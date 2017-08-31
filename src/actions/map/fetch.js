@@ -1,19 +1,20 @@
 
 import { loading, loadError, loadSuccess } from '../loading'
 
-export const FETCHED_ITEMS = 'FETCHED_ITEMS'
+export const FETCHED_MAP = 'FETCHED_MAP'
 
 // const api = new API()
 
-export default (items) => {
+export default (mapSettings) => {
+
   return (dispatch) => {
     dispatch(loading(true))
 
     dispatch(loadSuccess())
 
     dispatch({
-      type: FETCHED_ITEMS,
-      payload: [items],
+      type: FETCHED_MAP,
+      payload: {mapSettings},
     })
 
       dispatch(loading(false))
