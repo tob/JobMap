@@ -1,44 +1,53 @@
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-
-
-const AnyReactComponent = ({ text }) => (
-  <div style={{
-    position: 'relative', color: 'white', background: 'red',
-    height: 40, width: 60, top: -20, left: -30,
-  }}>
-    {text}
-  </div>
-);
+import React, { PureComponent } from 'react'
+import GoogleMap from 'google-map-react';
+import { connect } from 'react-redux'
+import Item from '../contents/Item.js'
 
 
 
-class Map extends Component {
-  static defaultProps = {
-    center: {lat: 59.95, lng: 30.33},
-    zoom: 11
-  };
+class Map extends PureComponent {
+
+  renderItem(item, index) {
+    return <Item key={index} { ...item } />
+  }
 
   render() {
+    if (!this.props) return null
+    const {
+      index,
+      company,
+      // startDate,
+      // endDate,
+      role,
+      summary,
+      center = this.props.mapSettings,
+      // active,
+      // open,
+      // current,
+      logo,
+      zoom = 5,
+      GoogleMapConfig = {
+        key:'AIzaSyCdPX0f-j9GMIC4N-0SnnOLT48_3ltY1_g',
+      },
+     } = this.props
+
+     console.log(this.props.center);
+     
     return (
 
-      <div className="box box-default" >
-        <div className="box-body">
-          <div className="row">
-            <GoogleMapReact
-              defaultCenter={this.props.center}
-              defaultZoom={this.props.zoom}
+            <GoogleMap
+              bootstrapURLKeys={GoogleMapConfig}
+              center={center}
+              zoom={zoom}
             >
-              <AnyReactComponent
-                lat={59.955413}
-                lng={30.337844}
-                text={'Kreyser Avrora'}/>
-            </GoogleMapReact>
-          </div>
-        </div>
-      </div>
-    );
+            {this.props.items.map(this.renderItem)}
+            </GoogleMap>
+    )
   }
 }
+const mapStateToProps = ({ items, mapSettings }) => ({
+  items,
+  mapSettings
+})
 
-export default Map
+export default connect(mapStateToProps)(Map)
