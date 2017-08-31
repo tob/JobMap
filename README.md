@@ -1,4 +1,4 @@
-##About this Project
+## About this Project
 This is a React app to visualize my professional experiences on a map.
 
 It uses React.js, Redux, and a google-map-react npm module.
