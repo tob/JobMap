@@ -2,10 +2,12 @@ import {FETCHED_MAP} from '../actions/map/fetch'
 import {SET_CENTER} from '../actions/map/setCenter'
 
 const mapSettings =  {
-    zoom: 3,
-    lat: 45.464211,
-    lng: 9.191383,
+  center: {
+      lat: 45.464211,
+      lng: 9.191383,},
+  zoom: 11,
   }
+
 
 
 

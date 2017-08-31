@@ -20,21 +20,21 @@ class Map extends PureComponent {
       // endDate,
       role,
       summary,
-      center = this.props.mapSettings,
+      center = this.props.mapSettings.center,
       // active,
       // open,
       // current,
       logo,
-      zoom = 5,
       GoogleMapConfig = {
         key:'AIzaSyCdPX0f-j9GMIC4N-0SnnOLT48_3ltY1_g',
       },
      } = this.props
 
-     console.log(this.props.center);
+     const zoom = this.props.mapSettings.zoom
 
+
+     
     return (
-
             <GoogleMap
               bootstrapURLKeys={GoogleMapConfig}
               center={center}

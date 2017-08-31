@@ -41,6 +41,7 @@ handleStepClick(e){
   const stepIndex = this.props.index;
   // this.changeIndex(stepIndex);
   this.setCenter();
+
 };
 
 changeIndex(stepIndex){
@@ -72,14 +73,16 @@ changeIndex(stepIndex){
   }
 
   setCenter() {
-      const mapSettings = this.props.center;
-      const stepIndex = this.props.index;
-      console.log({mapSettings, stepIndex});
-      this.props.setStep(
-        Object.assign({}, stepIndex));
+      const mapSettings = {center:this.props.center, zoom:this.props.zoom, stepIndex:this.props.index}
       this.props.setCenter(
         Object.assign({}, mapSettings));
     }
+
+  setStep(){
+    const stepIndex = this.props.index;
+    this.props.setStep(
+      Object.assign({}, stepIndex));
+  }
 
 
   render() {
@@ -102,8 +105,8 @@ changeIndex(stepIndex){
     return(
 
     <Step>
-      <div>
-        <StepButton index={index} onClick={this.handleStepClick.bind(this)}>
+
+        <StepButton onClick={this.handleStepClick.bind(this)}>
           {startDate} - {endDate}
         </StepButton>
         <StepContent>
@@ -113,7 +116,7 @@ changeIndex(stepIndex){
             <Item  { ...this.props } />
           </p>
         </StepContent>
-      </div>
+
     </Step>
     )
   }
