@@ -42,7 +42,7 @@ handlePrev = () => {
 
   playStory(stepIndex) {
     setInterval(() => {
-      const counter = counter + 1;
+      const counter = stepIndex + 1;
       console.log(counter)
       if (stepIndex <= this.props.items.length) {
         this.setCenter(counter);
@@ -92,7 +92,6 @@ handleStepClick(e){
   render() {
 
     const {
-      index,
       startDate,
       endDate,
       summary,

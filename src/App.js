@@ -10,6 +10,7 @@ import fetchMap from './actions/map/fetch'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/theme'
 import './App.css'
+import PhotoGrid from './layouts/PhotoGrid'
 
 class App extends Component {
   static propTypes = {
@@ -56,13 +57,14 @@ class App extends Component {
                   w={1}
                   style={{ height: '100%' }}
                   justify='left' >
-                  <Box w={1/4} style={{ height: '100%' }} >
+                  <Box w={1/5} style={{ height: '100%'}} >
                   <AllItems items={items}/>
                   </Box>
-                  <Box w={3/4} >
+                  <Box w={4/5} >
                     <Map items={activeItems} zoom={4}/>
                   </Box>
-                  <Box w={1} >
+                  <Box w={1} style={{ width: '800px' }}>
+
                   </Box>
                 </Flex>
               </div>

@@ -5,16 +5,26 @@ import setCenter from '../actions/map/setCenter'
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 
+import PhotoGrid from '../layouts/PhotoGrid'
+
 import RaisedButton from 'material-ui/RaisedButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import Paper from 'material-ui/Paper';
+
+const style = {
+  height: 300,
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 
 class Item extends PureComponent {
 
   constructor(props) {
   super(props);
-  this.state = {open: true, active:false, stepIndex:this.props.index, center:this.props.center};
+  this.state = {open: false, active:false, stepIndex:this.props.index, center:this.props.center};
 }
 
 handleToggle(e){
@@ -55,16 +65,11 @@ setCenter() {
      } = this.props
 
     return(
-        <div>
-        <Chip
-          onTouchTap={this.handleToggle.bind(this)}>
+        <Paper style={style} zDepth={3} >
+          <Chip
+            onTouchTap={this.handleToggle.bind(this)}>{startDate}</Chip>
+          <PhotoGrid />
 
-          {startDate}
-        </Chip>
-          <RaisedButton
-            onClick={this.handleTouchTap}
-            label="Click me"
-          />
           <Popover
             open={this.state.open}
             anchorEl={this.state.anchorEl}
@@ -79,7 +84,7 @@ setCenter() {
               <MenuItem primaryText="Sign out" />
             </Menu>
           </Popover>
-        </div>
+        </Paper>
 
     )
   }
