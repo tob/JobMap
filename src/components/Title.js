@@ -1,12 +1,27 @@
-// src/components/Title.js
+// src/components/Header.js
 import React, { PureComponent } from 'react'
+import {Flex, Box } from 'reflexbox'
 
-class Title extends PureComponent {
+class Header extends PureComponent {
   render() {
     return (
-      <h1>{ this.props.content }</h1>
+      <Flex
+        wrap
+        w={1}
+        justify='center' >
+        <Box w={1/4} >
+          <h1>ToBio</h1>
+        </Box>
+        <Box w={1/2} >
+
+        </Box>
+        <Box w={1/4} >
+          <a href='#'>Download</a>
+        </Box>
+
+      </Flex>
     )
   }
 }
 
-export default Title
+export default Header

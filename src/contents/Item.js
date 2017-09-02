@@ -3,14 +3,18 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import setCenter from '../actions/map/setCenter'
 import Avatar from 'material-ui/Avatar';
-import Drawer from 'material-ui/Drawer';
 import Chip from 'material-ui/Chip';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 
 class Item extends PureComponent {
 
   constructor(props) {
   super(props);
-  this.state = {open: false, active:false, stepIndex:this.props.index, center:this.props.center};
+  this.state = {open: true, active:false, stepIndex:this.props.index, center:this.props.center};
 }
 
 handleToggle(e){
@@ -50,18 +54,32 @@ setCenter() {
      } = this.props
 
     return(
+        <div>
+        <Chip
+          onTouchTap={this.handleToggle.bind(this)}>
 
-      <Chip
-        onTouchTap={this.handleToggle.bind(this)}>
+          {startDate}
+        </Chip>
+          <RaisedButton
+            onClick={this.handleTouchTap}
+            label="Click me"
+          />
+          <Popover
+            open={this.state.open}
+            anchorEl={this.state.anchorEl}
+            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+            onRequestClose={this.handleRequestClose}
+          >
+            <Menu>
+              <MenuItem primaryText="Refresh" />
+              <MenuItem primaryText="Help &amp; feedback" />
+              <MenuItem primaryText="Settings" />
+              <MenuItem primaryText="Sign out" />
+            </Menu>
+          </Popover>
+        </div>
 
-        {startDate}
-        <Drawer openSecondary={true} open={this.state.open}>
-          <h1>{company}</h1>
-          <h2>{role}</h2>
-          <p>{summary}</p>
-          <Avatar src={logo} />
-        </Drawer>
-      </Chip>
     )
   }
 }

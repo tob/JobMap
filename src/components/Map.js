@@ -14,7 +14,6 @@ class Map extends PureComponent {
   render() {
     if (!this.props) return null
     const {
-      index,
       company,
       // startDate,
       // endDate,
@@ -33,7 +32,7 @@ class Map extends PureComponent {
      const zoom = this.props.mapSettings.zoom
 
 
-     
+
     return (
             <GoogleMap
               bootstrapURLKeys={GoogleMapConfig}
@@ -45,8 +44,8 @@ class Map extends PureComponent {
     )
   }
 }
-const mapStateToProps = ({ items, mapSettings }) => ({
-  items,
+const mapStateToProps = ({ activeItems, mapSettings }) => ({
+  activeItems,
   mapSettings
 })
 

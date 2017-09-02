@@ -1,6 +1,7 @@
 import React, { PureComponent} from 'react'
 import {
   Step,
+  StepLabel,
   StepButton,
   StepContent,
 } from 'material-ui/Stepper';
@@ -11,41 +12,58 @@ import Item from './Item.js'
 import setCenter from '../actions/map/setCenter'
 import setStep from '../actions/items/setStep'
 import { connect } from 'react-redux'
+import WarningIcon from 'material-ui/svg-icons/alert/warning';
 
 
 
 class CustomStep extends PureComponent {
 
-componentWillMount(){
-  const { items } = this.props;
-  const { stepIndex } = this.props.index;
-}
+
 
 handleNext = () => {
-  const {stepIndex} = this.state;
-  console.log('Next clicked on step', stepIndex);
-  if (stepIndex < this.props.items.length) {
-    this.setState({stepIndex: stepIndex + 1});
+  const stepIndex = this.props.index + 1;
+  console.log('Next clicked on step', {stepIndex});
+  if (stepIndex <= 3) {
+    this.setCenter(stepIndex);
+  } else {
+    const stepIndex = 0
+    this.setCenter(stepIndex);
   }
+  console.log('Aftermath', {stepIndex});
 };
 
 handlePrev = () => {
-  const {stepIndex} = this.state;
+  const {stepIndex} = this.props.index - 1;
   console.log('Back clicked on step', stepIndex);
   if (stepIndex > 0) {
-    this.setState({stepIndex: stepIndex - 1});
+    this.setState({stepIndex: stepIndex});
   }
 };
+
+  playStory(stepIndex) {
+    setInterval(() => {
+      const counter = stepIndex + 1;
+      console.log(counter)
+      if (stepIndex <= 3) {
+        this.setCenter(counter);
+      } else {
+        const stepIndex = 0
+        this.setCenter(counter);
+      }
+    }, 2000)
+  }
 
 handleStepClick(e){
   const stepIndex = this.props.index;
   // this.changeIndex(stepIndex);
-  this.setCenter();
-
+  this.setCenter(stepIndex);
+  // this.playStory()
 };
 
-changeIndex(stepIndex){
-  this.setState({stepIndex});
+autoIndex() {
+  setInterval(() => {
+  this.handleNext()
+  }, 2000)
 }
 
 
@@ -72,17 +90,11 @@ changeIndex(stepIndex){
     );
   }
 
-  setCenter() {
-      const mapSettings = {center:this.props.center, zoom:this.props.zoom, stepIndex:this.props.index}
+  setCenter(stepIndex) {
+    const mapSettings = {center:this.props.center, zoom:this.props.zoom, stepIndex:stepIndex}
       this.props.setCenter(
         Object.assign({}, mapSettings));
     }
-
-  setStep(){
-    const stepIndex = this.props.index;
-    this.props.setStep(
-      Object.assign({}, stepIndex));
-  }
 
 
   render() {
@@ -103,19 +115,18 @@ changeIndex(stepIndex){
      } = this.props
 
      const stepIndex = this.props.mapSettings.stepIndex
+     const counter = 0
 
     return(
 
     <Step active={stepIndex === this.props.index}>
-
-        <StepButton onClick={this.handleStepClick.bind(this)}>
+        <StepLabel onClick={this.handleStepClick.bind(this)} icon={<Avatar src={logo} />}>
           {startDate} - {endDate}
-        </StepButton>
+        </StepLabel>
         <StepContent>
           <p>
             {summary}
-            DIT IS A TEST
-            <Item  { ...this.props } />
+            {this.renderStepActions({index})}
           </p>
         </StepContent>
 

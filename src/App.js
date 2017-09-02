@@ -9,7 +9,6 @@ import fetchItems from './actions/items/fetch'
 import fetchMap from './actions/map/fetch'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/theme'
-import DatePicker from 'material-ui/DatePicker';
 import './App.css'
 
 class App extends Component {
@@ -40,7 +39,13 @@ class App extends Component {
 
     if (!this.props) return null
     const {items} = this.props
-    console.log({items});
+    const stepIndex = this.props.mapSettings.stepIndex
+
+    const activeItems = items.filter((item) => {
+      return item.index <= stepIndex
+    })
+
+    console.log({activeItems});
 
     return (
             <MuiThemeProvider muiTheme={muiTheme}>
@@ -52,16 +57,11 @@ class App extends Component {
                   w={1}
                   style={{ height: '100%' }}
                   justify='left' >
-                  <Box w={1/4} style={{ height: '500px' }} >
-                  <DatePicker
-                    hintText="Open to Year"
-                    openToYearSelection={true}
-                    disabled={false}
-                    container='inline' />
+                  <Box w={1/4} style={{ height: '100%' }} >
                   <AllItems items={items}/>
                   </Box>
                   <Box w={3/4} >
-                    <Map items={items} zoom={4}/>
+                    <Map items={activeItems} zoom={4}/>
                   </Box>
                   <Box w={1} >
                   </Box>

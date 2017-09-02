@@ -7,11 +7,6 @@ import Step from './CustomStep.js'
 import { Stepper } from 'material-ui/Stepper';
 
 class AllItems extends PureComponent {
-  // constructor() {
-  //   super();
-  //     this.state = {stepIndex: 0};
-  // }
-
   constructor(props) {
     super(props);
       this.state = {open: false, active:false, stepIndex:0, center:{lat:this.props.lat,lng:this.props.lng,}};
