@@ -16,7 +16,7 @@ class Header extends PureComponent {
 
         </Box>
         <Box w={1/4} >
-          <a href='#'>Download</a>
+          <a>Download</a>
         </Box>
 
       </Flex>

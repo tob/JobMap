@@ -2,96 +2,88 @@ import React, { PureComponent} from 'react'
 import {
   Step,
   StepLabel,
-  StepButton,
+
   StepContent,
 } from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+
 import Avatar from 'material-ui/Avatar';
-import Item from './Item.js'
 import setCenter from '../actions/map/setCenter'
 import setStep from '../actions/items/setStep'
 import { connect } from 'react-redux'
-import WarningIcon from 'material-ui/svg-icons/alert/warning';
+
+// import Forward from 'material-ui/svg-icons/Content/Forward'
+import IconButton from 'material-ui/IconButton';
+import ArrowUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
+import ArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 
 
 
 class CustomStep extends PureComponent {
 
-
-
 handleNext = () => {
-  const stepIndex = this.props.index + 1;
-  console.log('Next clicked on step', {stepIndex});
-  if (stepIndex <= 3) {
+  const stepIndex = this.props.index + 1
+  if (stepIndex <= this.props.items.length -1) {
     this.setCenter(stepIndex);
   } else {
-    const stepIndex = 0
-    this.setCenter(stepIndex);
+    this.setCenter(0);
   }
-  console.log('Aftermath', {stepIndex});
 };
 
 handlePrev = () => {
-  const {stepIndex} = this.props.index - 1;
+  const stepIndex = this.props.index - 1;
   console.log('Back clicked on step', stepIndex);
-  if (stepIndex > 0) {
-    this.setState({stepIndex: stepIndex});
+  if (stepIndex >= 0) {
+    this.setCenter(stepIndex);
+  } else {
+    const stepIndex = this.props.items.length -1
+    this.setCenter(stepIndex)
   }
 };
 
   playStory(stepIndex) {
     setInterval(() => {
-      const counter = stepIndex + 1;
+      const counter = counter + 1;
       console.log(counter)
-      if (stepIndex <= 3) {
+      if (stepIndex <= this.props.items.length) {
         this.setCenter(counter);
       } else {
         const stepIndex = 0
-        this.setCenter(counter);
+        this.setCenter(stepIndex);
       }
     }, 2000)
   }
 
 handleStepClick(e){
   const stepIndex = this.props.index;
-  // this.changeIndex(stepIndex);
   this.setCenter(stepIndex);
-  // this.playStory()
 };
 
-autoIndex() {
-  setInterval(() => {
-  this.handleNext()
-  }, 2000)
-}
+// autoIndex() {
+//   setInterval(() => {
+//   this.handleNext()
+//   }, 2000)
+// }
 
 
   renderStepActions(step) {
     return (
-      <div style={{margin: '12px 0'}}>
-        <RaisedButton
-          label="Next"
-          disableTouchRipple={true}
-          disableFocusRipple={true}
-          primary={true}
+      <div>
+        <IconButton
           onClick={this.handleNext}
-          style={{marginRight: 12}}
-        />
-        {step > 0 && (
-          <FlatButton
-            label="Back"
-            disableTouchRipple={true}
-            disableFocusRipple={true}
-            onClick={this.handlePrev}
-          />
-        )}
+        >
+          <ArrowDown />
+        </IconButton>
+        <IconButton
+          onClick={this.handlePrev}
+        >
+          <ArrowUp />
+        </IconButton>
       </div>
     );
   }
 
   setCenter(stepIndex) {
-    const mapSettings = {center:this.props.center, zoom:this.props.zoom, stepIndex:stepIndex}
+    const mapSettings = {center:this.props.items[stepIndex].center, zoom:this.props.items[stepIndex].zoom, stepIndex:stepIndex}
       this.props.setCenter(
         Object.assign({}, mapSettings));
     }
@@ -101,21 +93,13 @@ autoIndex() {
 
     const {
       index,
-      company,
       startDate,
       endDate,
-      // role,
       summary,
-      // active,
-      // open,
-      // current,
-      mapSettings,
       logo,
-      // changeIndex,
      } = this.props
 
      const stepIndex = this.props.mapSettings.stepIndex
-     const counter = 0
 
     return(
 
@@ -124,10 +108,10 @@ autoIndex() {
           {startDate} - {endDate}
         </StepLabel>
         <StepContent>
-          <p>
+
             {summary}
-            {this.renderStepActions({index})}
-          </p>
+            {this.renderStepActions({stepIndex})}
+
         </StepContent>
 
     </Step>
@@ -135,9 +119,10 @@ autoIndex() {
   }
 }
 
-const mapStateToProps = ({ stepIndex, mapSettings }) => ({
+const mapStateToProps = ({ stepIndex, mapSettings, items }) => ({
   stepIndex,
-  mapSettings
+  mapSettings,
+  items
 })
 
 export default connect(mapStateToProps, { setCenter, setStep })(CustomStep)

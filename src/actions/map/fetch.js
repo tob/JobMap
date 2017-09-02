@@ -1,5 +1,5 @@
 
-import { loading, loadError, loadSuccess } from '../loading'
+import { loading, loadSuccess } from '../loading'
 
 export const FETCHED_MAP = 'FETCHED_MAP'
 

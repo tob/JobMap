@@ -40,6 +40,7 @@ setCenter() {
   }
 
   render() {
+
     setCenter()
 
     const {

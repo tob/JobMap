@@ -14,18 +14,19 @@ class Map extends PureComponent {
   render() {
     if (!this.props) return null
     const {
-      company,
+      // company,
       // startDate,
       // endDate,
-      role,
-      summary,
+      // role,
+      // summary,
       center = this.props.mapSettings.center,
       // active,
       // open,
       // current,
-      logo,
+      // logo,
       GoogleMapConfig = {
         key:'AIzaSyCdPX0f-j9GMIC4N-0SnnOLT48_3ltY1_g',
+        styles: [{"stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"on"},{"hue":"#ffffff"},{"saturation":-100},{"lightness":100}]},{"featureType":"water","stylers":[{"visibility":"on"},{"lightness":-35},{"saturation":-100}]},{"featureType":"administrative.province","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"administrative.country","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":90}]}]
       },
      } = this.props
 
@@ -37,6 +38,7 @@ class Map extends PureComponent {
             <GoogleMap
               bootstrapURLKeys={GoogleMapConfig}
               center={center}
+              styles={GoogleMapConfig.styles}
               zoom={zoom}
             >
             {this.props.items.map(this.renderItem)}

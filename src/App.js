@@ -41,11 +41,10 @@ class App extends Component {
     const {items} = this.props
     const stepIndex = this.props.mapSettings.stepIndex
 
-    const activeItems = items.filter((item) => {
-      return item.index <= stepIndex
+    const activeItems = items.filter((item, index) => {
+      return index <= stepIndex
     })
 
-    console.log({activeItems});
 
     return (
             <MuiThemeProvider muiTheme={muiTheme}>

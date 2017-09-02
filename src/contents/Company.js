@@ -39,13 +39,11 @@ setCenter() {
     setCenter()
 
     const {
-      index,
       company,
       // startDate,
       // endDate,
       role,
       summary,
-      mapSettings,
       logo,
      } = this.props
 
