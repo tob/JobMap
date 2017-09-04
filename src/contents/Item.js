@@ -14,7 +14,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 
 const style = {
-  height: 300,
+  width: 400,
   margin: 20,
   textAlign: 'center',
   display: 'inline-block',
@@ -65,25 +65,9 @@ setCenter() {
      } = this.props
 
     return(
-        <Paper style={style} zDepth={3} >
-          <Chip
-            onTouchTap={this.handleToggle.bind(this)}>{startDate}</Chip>
-          <PhotoGrid />
 
-          <Popover
-            open={this.state.open}
-            anchorEl={this.state.anchorEl}
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-            onRequestClose={this.handleRequestClose}
-          >
-            <Menu>
-              <MenuItem primaryText="Refresh" />
-              <MenuItem primaryText="Help &amp; feedback" />
-              <MenuItem primaryText="Settings" />
-              <MenuItem primaryText="Sign out" />
-            </Menu>
-          </Popover>
+        <Paper style={style} zDepth={3} >
+          <PhotoGrid />
         </Paper>
 
     )

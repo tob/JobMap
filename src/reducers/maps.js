@@ -5,7 +5,7 @@ const mapSettings =  {
   center: {
       lat: 45.464211,
       lng: 9.191383,},
-  zoom: 11,
+  zoom: 1,
   }
 
 

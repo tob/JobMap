@@ -63,8 +63,8 @@ class App extends Component {
                   <Box w={4/5} >
                     <Map items={activeItems} zoom={4}/>
                   </Box>
-                  <Box w={1} style={{ width: '800px' }}>
-
+                  <Box w={1/3} style={{ width: '400px' }}>
+                  <PhotoGrid />
                   </Box>
                 </Flex>
               </div>
