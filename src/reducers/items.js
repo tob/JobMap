@@ -1,6 +1,49 @@
 import {FETCHED_ITEMS} from '../actions/items/fetch'
 import {SET_STEPINDEX} from '../actions/items/setStep'
 
+var images = [
+  {
+    img: 'http://lorempixel.com/800/600/animals/',
+    title: 'Breakfast',
+    author: 'jill111',
+  },
+  {
+    img: 'http://lorempixel.com/800/600/sports/',
+    title: 'Tasty burger',
+    author: 'pashminu',
+  },
+  {
+    img: 'http://lorempixel.com/800/600/food/',
+    title: 'Camera',
+    author: 'Danson67',
+  },
+  {
+    img: 'http://lorempixel.com/800/600/cats/',
+    title: 'Morning',
+    author: 'fancycrave1',
+  },
+  {
+    img: 'http://lorempixel.com/800/600/animals/',
+    title: 'Hats',
+    author: 'Hans',
+  },
+  {
+    img: 'http://lorempixel.com/800/600/animals/',
+    title: 'Honey',
+    author: 'fancycravel',
+  },
+  {
+    img: 'http://lorempixel.com/800/600/animals/',
+    title: 'Vegetables',
+    author: 'jill111',
+  },
+  {
+    img: 'http://lorempixel.com/800/600/animals/',
+    title: 'Water plant',
+    author: 'BkrmadtyaKarki',
+  },
+];
+
 const items = [
   {
     // index: 0,
@@ -12,6 +55,7 @@ const items = [
     active: false,
     open: false,
     current: true,
+    images: images,
     zoom: 6,
     center: {lat: 45.464211,
         lng: 9.191383,},
@@ -29,6 +73,7 @@ const items = [
     active: false,
     open: false,
     current: true,
+    images: images,
     zoom: 6,
     center: {lat: 44.1396,
         lng: 12.2464,},
@@ -46,6 +91,7 @@ const items = [
     active: false,
     open: false,
     current: true,
+    images: images,
     zoom: 6,
     center: { lat: 53.350140,
         lng: -6.266155,},
@@ -63,6 +109,7 @@ const items = [
     active: false,
     open: false,
     current: true,
+    images: images,
     zoom: 6,
     center: { lat: 49.195060,
         lng: 16.606837,},
@@ -80,6 +127,7 @@ const items = [
     active: false,
     open: false,
     current: true,
+    images: images,
     zoom:6,
     center: {    lat: 52.377956,
         lng: 4.897070,},
@@ -87,6 +135,8 @@ const items = [
     lng: 4.897070,
     logo: 'https://pbs.twimg.com/profile_images/378800000566044758/2e1abbee62059eef9683f0f73135013e_400x400.png',
   },]
+
+
 
 
 

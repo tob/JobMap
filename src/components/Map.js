@@ -9,7 +9,7 @@ import mapStyles from './mapStyles'
 class Map extends PureComponent {
 
   renderItem(item, index) {
-    return <Item key={index} { ...item } />
+    return <Item key={index} step={index} { ...item } />
   }
 
   render() {
@@ -22,6 +22,7 @@ class Map extends PureComponent {
       // logo,
       GoogleMapConfig = {
         key:'AIzaSyCdPX0f-j9GMIC4N-0SnnOLT48_3ltY1_g',
+        scrollwheel: false,
       },
      } = this.props
      console.log({mapStyles})
@@ -34,7 +35,6 @@ class Map extends PureComponent {
               bootstrapURLKeys={GoogleMapConfig}
               center={center}
               options={{ styles: mapStyles }}
-
               zoom={zoom}
             >
             {this.props.items.map(this.renderItem)}

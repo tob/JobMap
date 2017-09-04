@@ -2,15 +2,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import setCenter from '../actions/map/setCenter'
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
-
 import PhotoGrid from '../layouts/PhotoGrid'
-
-import RaisedButton from 'material-ui/RaisedButton';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 
 const style = {
@@ -24,7 +16,7 @@ class Item extends PureComponent {
 
   constructor(props) {
   super(props);
-  this.state = {open: false, active:false, stepIndex:this.props.index, center:this.props.center};
+  this.state = {open: false, active:false, stepIndex:this.props.mapSettings.stepIndex, center:this.props.center};
 }
 
 handleToggle(e){
@@ -49,25 +41,28 @@ setCenter() {
       Object.assign({}, mapSettings));
   }
 
+  isActive(){
+    const stepIndex = this.props.mapSettings.stepIndex
+    if (stepIndex === this.props.step) return (
+      <PhotoGrid />)
+     else return (
+      <h2>Nothing to see</h2>
+    )
+  }
+
   render() {
 
     setCenter()
 
     const {
-      index,
       company,
-      startDate,
-      // endDate,
-      role,
-      summary,
-      mapSettings,
-      logo,
      } = this.props
 
     return(
 
         <Paper style={style} zDepth={3} >
-          <PhotoGrid />
+        {this.isActive()}
+        {company}
         </Paper>
 
     )
