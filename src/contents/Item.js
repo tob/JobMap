@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import setCenter from '../actions/map/setCenter'
 import PhotoGrid from '../layouts/PhotoGrid'
 import Paper from 'material-ui/Paper';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const style = {
-  width: 400,
+  width: 200,
   margin: 20,
   textAlign: 'center',
   display: 'inline-block',
@@ -20,7 +21,6 @@ class Item extends PureComponent {
 }
 
 handleToggle(e){
-
   this.setState(
     {
       open: !this.state.open,
@@ -29,14 +29,11 @@ handleToggle(e){
       center:this.props.center,
     }
   );
-  console.log(this.state);
-  console.log(this.props);
   this.setCenter()
 }
 
-setCenter() {
-    const mapSettings = this.props.center
-    console.log({mapSettings});
+setCenter(stepIndex) {
+  const mapSettings = {center:this.props.center, zoom:this.props.zoom, stepIndex:stepIndex}
     this.props.setCenter(
       Object.assign({}, mapSettings));
   }
@@ -55,14 +52,23 @@ setCenter() {
     setCenter()
 
     const {
+      step,
       company,
+      startDate,
      } = this.props
 
     return(
 
-        <Paper style={style} zDepth={3} >
+        <Paper style={style} zDepth={3} onClick={this.setCenter.bind(this, step)}>
+        <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+          transitionAppear={true}
+          transitionAppearTimeout={2000}>
         {this.isActive()}
-        {company}
+        </ReactCSSTransitionGroup>
+        {company} - {startDate}
         </Paper>
 
     )

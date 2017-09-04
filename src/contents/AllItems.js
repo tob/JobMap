@@ -31,6 +31,7 @@ class AllItems extends PureComponent {
         orientation="vertical"
         >
         { this.props.items.map(this.renderStep) }
+
         </Stepper>
       </div>
     )
